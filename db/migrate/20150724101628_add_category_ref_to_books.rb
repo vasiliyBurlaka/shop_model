@@ -1,5 +1,5 @@
 class AddCategoryRefToBooks < ActiveRecord::Migration
   def change
-    add_column :books, :category_id, :reference
+    add_reference :books, :category, index: true, foreign_key: true
   end
 end
