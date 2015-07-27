@@ -13,7 +13,25 @@ RSpec.describe Customer, type: :model do
     it {expect(customer).to have_many(:order)}
     it {expect(customer).to have_many(:rating)}
 
-    pending "A customer should be able to create a new order
+    context "#create_order" do
+      it "return Order" do
+        expect(customer.create_order).to be_instance_of(Order)
+      end
+      it "change Orders count" do
+        expect{customer.create_order}.to change{Order.count}
+      end
+    end
+
+    context "#current_order" do
+      it "return Order" do
+        puts customer.create_order
+        expect(customer.current_order).to be_instance_of(Order)
+      end
+
+    end
+
+    pending "
+      A customer should be able to create a new order
       A customer should be able to return a current order in progress"
     
 end

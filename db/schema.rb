@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150726192106) do
+ActiveRecord::Schema.define(version: 20150727033558) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(version: 20150726192106) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "orders", force: :cascade do |t|
+    t.float    "total_prise"
+    t.datetime "completed_date"
+    t.string   "state",          default: "in_progress", null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "customer_id"
+  end
+
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
 
 # Could not dump table "ratings" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
