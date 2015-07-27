@@ -23,15 +23,25 @@ RSpec.describe Customer, type: :model do
     end
 
     context "#current_order" do
-      it "return Order" do
-        puts customer.create_order
-        expect(customer.current_order).to be_instance_of(Order)
+      before do
+        @order = customer.create_order
+      end
+
+      it "return latest Order" do
+        second_order = customer.create_order
+        expect(customer.current_order).to eq(second_order)
+      end
+
+      it "return Order of current user" do
+        expect(customer.current_order.customer_id).to eq(customer.id)
+      end
+
+      it "return Order of current user" do
+        @order.state = "complited"
+        @order.save
+        expect(customer.current_order).to eq(nil)
       end
 
     end
 
-    pending "
-      A customer should be able to create a new order
-      A customer should be able to return a current order in progress"
-    
 end
