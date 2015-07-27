@@ -7,7 +7,7 @@ class Customer < ActiveRecord::Base
     has_many :rating
 
     def create_order
-       Order.create(customer_id: self.id, total_prise: 0)
+      Order.create(customer_id: self.id, total_prise: 0)
     end
 
     def current_order
