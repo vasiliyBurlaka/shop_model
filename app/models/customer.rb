@@ -3,15 +3,15 @@ class Customer < ActiveRecord::Base
     validates :email, :password, :first_name, :last_name, presence: true
     validates :email, uniqueness: true
 
-    has_many :order
-    has_many :rating
+    has_many :orders
+    has_many :ratings
 
     def create_order
       Order.create(customer_id: self.id, total_prise: 0)
     end
 
     def current_order
-      Order.where(state: "in_progress", customer_id: self.id).last
+      self.orders.where(state: "in_progress").last
     end
 
 end

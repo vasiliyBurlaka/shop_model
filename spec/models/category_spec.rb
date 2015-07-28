@@ -6,5 +6,5 @@ RSpec.describe Category, type: :model do
   it{ expect(category).to validate_uniqueness_of(:title)}
   it{ expect(category).to validate_presence_of(:title)}
 
-  it{ expect(category).to have_many(:book)}
+  it{ expect(category).to have_many(:books)}
 end

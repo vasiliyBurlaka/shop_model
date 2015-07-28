@@ -6,5 +6,5 @@ RSpec.describe Author, type: :model do
   it {expect(author).to validate_presence_of(:first_name)}
   it {expect(author).to validate_presence_of(:last_name)}
 
-  it {expect(author).to have_many(:book)}
+  it {expect(author).to have_many(:books)}
 end

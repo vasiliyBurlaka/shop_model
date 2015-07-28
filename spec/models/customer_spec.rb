@@ -10,8 +10,8 @@ RSpec.describe Customer, type: :model do
 
     it {expect(customer).to validate_uniqueness_of(:email)}
     
-    it {expect(customer).to have_many(:order)}
-    it {expect(customer).to have_many(:rating)}
+    it {expect(customer).to have_many(:orders)}
+    it {expect(customer).to have_many(:ratings)}
 
     context "#create_order" do
       it "return Order" do
@@ -36,7 +36,7 @@ RSpec.describe Customer, type: :model do
         expect(customer.current_order.customer_id).to eq(customer.id)
       end
 
-      it "return Order of current user" do
+      it "return nil if Order not in progress" do
         @order.state = "complited"
         @order.save
         expect(customer.current_order).to eq(nil)
