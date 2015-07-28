@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'pages/index'
+
+  devise_for :customers, :controllers => { registrations: 'registrations' }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,4 +56,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  root 'pages#index'
 end
