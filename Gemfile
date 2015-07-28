@@ -51,3 +51,8 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers'
 end
+
+gem 'devise'
+
+gem 'execjs'
+gem 'therubyracer'
