@@ -21,5 +21,25 @@ RSpec.describe Order, type: :model do
     end
   end
 
+  context "#recalculate_total_price" do
+    xit "calculate price by OrderItems"
+    xit "update total price"
+  end
+
+  context "#add_book" do
+    context "called with right parameters" do
+      xit "change count of OrderItems" do
+      end
+      xit "change total price" do
+      end
+      xit "return true" do
+      end
+    end
+    context "called with bad parametrs" do
+      xit "return false" do
+      end
+    end
+  end
+
 
 end

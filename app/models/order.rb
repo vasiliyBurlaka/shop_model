@@ -10,4 +10,16 @@ class Order < ActiveRecord::Base
 
   has_many :order_items
 
-end
+  def recalculate_total_price
+    self.total_price = self.order_items.inject(0) {
+      |total_price, item| 
+      total_price + item.price * item.quantity
+    }
+  end
+
+  def add_book(params)
+    self.order_items.create(params)
+    recalculate_total_price
+  end
+
+ end
