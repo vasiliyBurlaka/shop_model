@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728120756) do
+ActiveRecord::Schema.define(version: 20150802203322) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.text     "address"
+    t.integer  "zipcode"
+    t.string   "city"
+    t.string   "phone"
+    t.integer  "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
@@ -41,6 +51,23 @@ ActiveRecord::Schema.define(version: 20150728120756) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.string   "number"
+    t.integer  "cvv"
+    t.integer  "expiration_month"
+    t.integer  "expiration_year"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string   "email"
     t.string   "password"
@@ -62,16 +89,34 @@ ActiveRecord::Schema.define(version: 20150728120756) do
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true
   add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
 
-  create_table "orders", force: :cascade do |t|
-    t.float    "total_prise"
-    t.datetime "completed_date"
-    t.string   "state",          default: "in_progress", null: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.integer  "customer_id"
+  create_table "order_items", force: :cascade do |t|
+    t.float    "price"
+    t.integer  "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "book_id"
+    t.integer  "order_id"
   end
 
+  add_index "order_items", ["book_id"], name: "index_order_items_on_book_id"
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.float    "total_price"
+    t.datetime "completed_date"
+    t.string   "state",               default: "in_progress", null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "customer_id"
+    t.integer  "credit_card_id"
+    t.integer  "billing_address_id"
+    t.integer  "shipping_address_id"
+  end
+
+  add_index "orders", ["billing_address_id"], name: "index_orders_on_billing_address_id"
+  add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id"
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
+  add_index "orders", ["shipping_address_id"], name: "index_orders_on_shipping_address_id"
 
   create_table "ratings", force: :cascade do |t|
     t.text     "text_review"

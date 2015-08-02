@@ -8,7 +8,7 @@ RSpec.describe Customer, type: :model do
     it {expect(customer).to validate_presence_of(:first_name)}
     it {expect(customer).to validate_presence_of(:last_name)}
 
-    it {expect(customer).to validate_uniqueness_of(:email)}
+    it {expect(customer).to validate_uniqueness_of(:email).case_insensitive}
     
     it {expect(customer).to have_many(:orders)}
     it {expect(customer).to have_many(:ratings)}
@@ -36,8 +36,8 @@ RSpec.describe Customer, type: :model do
         expect(customer.current_order.customer_id).to eq(customer.id)
       end
 
-      it "return nil if Order not in progress" do
-        @order.state = "complited"
+      it "return nil when Order is not in progress" do
+        @order.state = Order::STATES[1]
         @order.save
         expect(customer.current_order).to eq(nil)
       end

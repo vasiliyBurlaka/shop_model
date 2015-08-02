@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :order do
-    total_prise 1.5
-completed_date "2015-07-27 06:27:49"
-state "MyString"
+    total_price {Faker::Commerce.price}
+    completed_date {Faker::Date.between(2.days.ago, Date.today)}
+    state {Order::STATES[0]}
   end
 
 end
