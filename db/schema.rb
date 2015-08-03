@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20150802210939) do
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
 
   create_table "orders", force: :cascade do |t|
-    t.float    "total_price"
+    t.float    "total_prise"
     t.datetime "completed_date"
     t.string   "state",               default: "in_progress", null: false
     t.datetime "created_at",                                  null: false
